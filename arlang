@@ -1,0 +1,614 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+
+
+class Arlang
+{
+    static Dictionary<string, string> variables = new Dictionary<string, string>();
+    static Random rnd = new Random(); // Create a single instance of Random
+ 
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Welcome to Arlang! Type 'help' to see available commands.");
+
+        while (true)
+        {
+            Console.Write("> ");
+            string input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input)) continue;
+
+            string[] parts = input.Split(new[] { ' ' }, 2);
+            string command = parts[0].ToLower();
+            string argument = parts.Length > 1 ? parts[1] : null;
+
+            switch (command)
+            {
+                case "print":
+                    PrintCommand(argument);
+                    break;
+                case "makedir":
+                    MakeDirectory(argument);
+                    break;
+                case "cd":
+                    ChangeDirectory(argument);
+                    break;
+                case "del":
+                    DeleteFile(argument);
+                    break;
+                case "lf":
+                    ListFiles();
+                    break;
+                case "exit":
+                    Console.WriteLine("Exiting Arlang.");
+                    return;
+                case "help":
+                    ShowHelp();
+                    break;
+                case "color":
+                    ChangeColor(argument);
+                    break;
+                case "rnm":
+                    RenameFile(argument);
+                    break;
+                case "time":
+                    ShowTime();
+                    break;
+                
+                case "cls":
+                    ClearScreen();
+                    break;
+                case "set":
+                    SetVariable(argument);
+                    break;
+                case "get":
+                    GetVariable(argument);
+                    break;
+                case "run":
+                    RunScript(argument);
+                    break;
+                case "save":
+                    SaveScript(argument);
+                    break;
+                case "edit":
+                    EditFile(argument);
+                    break;
+                case "crfile":
+                    CreateFile(argument);
+                    break;
+                case "theme":
+                    ChangeTheme(argument);
+                    break;
+                case "createicon":
+                    CreateIcon(argument);
+                    break;
+                case "createdesktop":
+                    CreateDesktop(argument);
+                    break;
+                case "random":
+                    RandomCommand(argument);
+                    break;
+                case "opendesktop":
+                    OpenDesktop(argument);
+                    break;
+                case "play":
+                    PlaySound(argument);
+                    break;
+                case "stop":
+                    StopSound();
+                    break;
+                case "calc":
+                    Calculate(argument);
+                    break;
+                default:
+                    Console.WriteLine($"Unknown command: {command}");
+                    break;
+            }
+        }
+    }
+
+    // Existing methods...
+
+    static void PrintCommand(string argument)
+    {
+        if (string.IsNullOrWhiteSpace(argument) || !argument.StartsWith("(") || !argument.EndsWith(")"))
+        {
+            Console.WriteLine("Usage: print(<text>)");
+            return;
+        }
+
+        string text = argument.Trim('(', ')');
+        Echo(text);
+    }
+
+    static void PlaySound(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename))
+        {
+            Console.WriteLine("Usage: play <filename>");
+            return;
+        }
+
+        try { }
+        
+           
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error playing sound: {ex.Message}");
+        }
+    }
+
+    static void StopSound()
+    {
+        
+        {
+            Console.WriteLine("No sound is currently playing.");
+        }
+    }
+
+    // Existing methods...
+
+    static void Echo(string text)
+    {
+        Console.WriteLine(text);
+    }
+
+    static void MakeDirectory(string directory)
+    {
+        if (string.IsNullOrWhiteSpace(directory))
+        {
+            Console.WriteLine("Usage: mkdir <directory>");
+            return;
+        }
+
+        try
+        {
+            Directory.CreateDirectory(directory);
+            Console.WriteLine($"Directory '{directory}' created.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating directory: {ex.Message}");
+        }
+    }
+
+    static void ChangeDirectory(string directory)
+    {
+        if (string.IsNullOrWhiteSpace(directory))
+        {
+            Console.WriteLine("Usage: cd <directory>");
+            return;
+        }
+
+        try
+        {
+            Directory.SetCurrentDirectory(directory);
+            Console.WriteLine($"Changed directory to '{directory}'.");
+        }
+        catch (DirectoryNotFoundException)
+        {
+            Console.WriteLine($"Directory '{directory}' not found.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error changing directory: {ex.Message}");
+        }
+    }
+
+    static void DeleteFile(string file)
+    {
+        if (string.IsNullOrWhiteSpace(file))
+        {
+            Console.WriteLine("Usage: del <file>");
+            return;
+        }
+
+        try
+        {
+            File.Delete(file);
+            Console.WriteLine($"File '{file}' deleted.");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine($"File '{file}' not found.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting file: {ex.Message}");
+        }
+    }
+
+    static void ListFiles()
+    {
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory());
+        string[] directories = Directory.GetDirectories(Directory.GetCurrentDirectory());
+
+        Console.WriteLine("Files:");
+        foreach (var file in files)
+        {
+            Console.WriteLine(Path.GetFileName(file));
+        }
+
+        Console.WriteLine("Directories:");
+        foreach (var dir in directories)
+        {
+            Console.WriteLine(Path.GetFileName(dir));
+        }
+    }
+
+    static void ShowHelp()
+    {
+        Console.WriteLine("Available commands:");
+        Console.WriteLine("print(<text>) - Print text to the console");
+        Console.WriteLine("makedir <directory> - Create a new directory");
+        Console.WriteLine("cd <directory> - Change current directory");
+        Console.WriteLine("del <file> - Delete a file");
+        Console.WriteLine("lf - List files and directories");
+        Console.WriteLine("exit - Exit the interpreter");
+        Console.WriteLine("help - Show this help message");
+        Console.WriteLine("color <color> - Change console text color (e.g., red, green)");
+        Console.WriteLine("save <filename> - Save commands to a .arl file");
+        Console.WriteLine("run <filename> - Execute commands from a .arl file or .deskarl file");
+        Console.WriteLine("edit <filename> - Create or edit a code file");
+        Console.WriteLine("crfile <filename> - Create a new file with the specified name and extension");
+        Console.WriteLine("theme <color> - Change the theme color");
+        Console.WriteLine("createicon <name> - Create a new icon with the specified name");
+        Console.WriteLine("createdesktop <resolution> - Create a desktop with the specified resolution (e.g., 800x600)");
+        Console.WriteLine("random <min> <max> - Generate a random number between min and max");
+        Console.WriteLine("opendesktop <filename.deskarl> - Open a desktop interface");
+        Console.WriteLine("play <filename> - Play a sound file");
+        Console.WriteLine("stop - Stop the currently playing sound");
+        Console.WriteLine("calc <expression> - Calculate a mathematical expression");
+    }
+
+    static void ChangeColor(string color)
+    {
+        if (string.IsNullOrWhiteSpace(color))
+        {
+            Console.WriteLine("Usage: color <color>");
+            return;
+        }
+
+        try
+        {
+            ConsoleColor consoleColor;
+            if (Enum.TryParse(color, true, out consoleColor))
+            {
+                Console.ForegroundColor = consoleColor;
+                Console.WriteLine($"Console color changed to {color}.");
+            }
+            else
+            {
+                Console.WriteLine($"Unknown color: {color}. Please use a valid console color.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error changing color: {ex.Message}");
+        }
+    }
+
+    static void RenameFile(string argument)
+    {
+        if (string.IsNullOrWhiteSpace(argument))
+        {
+            Console.WriteLine("Usage: rnm <oldname> <newname>");
+            return;
+        }
+
+        string[] parts = argument.Split(' ');
+        if (parts.Length != 2)
+        {
+            Console.WriteLine("Usage: rnm <oldname> <newname>");
+            return;
+        }
+
+        try
+        {
+            File.Move(parts[0], parts[1]);
+            Console.WriteLine($"File renamed from '{parts[0]}' to '{parts[1]}'.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error renaming file: {ex.Message}");
+        }
+    }
+
+    static void ShowTime()
+    {
+        Console.WriteLine($"Current time: {DateTime.Now}");
+    }
+
+    
+  
+
+    static void ClearScreen()
+    {
+        Console.Clear();
+    }
+
+    static void SetVariable(string argument)
+    {
+        if (string.IsNullOrWhiteSpace(argument))
+        {
+            Console.WriteLine("Usage: set <variable> <value>");
+            return;
+        }
+
+        string[] parts = argument.Split(' ');
+        if (parts.Length != 2)
+        {
+            Console.WriteLine("Usage: set <variable> <value>");
+            return;
+        }
+
+        variables[parts[0]] = parts[1];
+        Console.WriteLine($"Variable '{parts[0]}' set to '{parts[1]}'.");
+    }
+
+    static void GetVariable(string variable)
+    {
+        if (string.IsNullOrWhiteSpace(variable))
+        {
+            Console.WriteLine("Usage: get <variable>");
+            return;
+        }
+
+        if (variables.TryGetValue(variable, out string value))
+        {
+            Console.WriteLine($"Value of '{variable}': {value}");
+        }
+        else
+        {
+            Console.WriteLine($"Variable '{variable}' not found.");
+        }
+    }
+
+    static void RunScript(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename) || !(filename.EndsWith(".arl") || filename.EndsWith(".deskarl")))
+        {
+            Console.WriteLine("Usage: run <filename.arl or filename.deskarl>");
+            return;
+        }
+
+        try
+        {
+            string[] lines = File.ReadAllLines(filename);
+            foreach (string line in lines)
+            {
+                ExecuteCommand(line);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error running script: {ex.Message}");
+        }
+    }
+
+    static void ExecuteCommand(string commandLine)
+    {
+        string[] parts = commandLine.Split(new[] { ' ' }, 2);
+        string command = parts[0].ToLower();
+        string argument = parts.Length > 1 ? parts[1] : null;
+
+        switch (command)
+        {
+            case "print":
+                PrintCommand(argument);
+                break;
+            case "color":
+                ChangeColor(argument);
+                break;
+            case "play":
+                PlaySound(argument);
+                break;
+            case "stop":
+                StopSound();
+                break;
+            case "calc":
+                Calculate(argument);
+                break;
+            // Add other commands as needed
+            default:
+                Console.WriteLine($"Unknown command in script: {command}");
+                break;
+        }
+    }
+
+    static void OpenDesktop(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename) || !filename.EndsWith(".deskarl"))
+        {
+            Console.WriteLine("Usage: opendesktop <filename.deskarl>");
+            return;
+        }
+
+        try
+        {
+            Console.WriteLine($"Opened desktop from {filename}. You now have a graphical interface.");
+            // Additional code to create and display the GUI would go here
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error opening desktop: {ex.Message}");
+        }
+    }
+
+    static void SaveScript(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename) || !filename.EndsWith(".arl"))
+        {
+            Console.WriteLine("Usage: save <filename.arl>");
+            return;
+        }
+
+        Console.WriteLine("Enter commands to save (type 'exit' to finish):");
+        List<string> commands = new List<string>();
+        while (true)
+        {
+            string command = Console.ReadLine();
+            if (command.ToLower() == "exit") break;
+            commands.Add(command);
+        }
+
+        try
+        {
+            File.WriteAllLines(filename, commands);
+            Console.WriteLine($"Commands saved to '{filename}'.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving file: {ex.Message}");
+        }
+    }
+
+    static void EditFile(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename))
+        {
+            Console.WriteLine("Usage: edit <filename>");
+            return;
+        }
+
+        List<string> lines = new List<string>();
+        if (File.Exists(filename))
+        {
+            lines.AddRange(File.ReadAllLines(filename));
+        }
+
+        Console.WriteLine("Editing file. Type your code below (type 'exit' to save and exit):");
+        while (true)
+        {
+            string line = Console.ReadLine();
+            if (line.ToLower() == "exit") break;
+            lines.Add(line);
+        }
+
+        try
+
+        {
+            File.WriteAllLines(filename, lines);
+            Console.WriteLine($"File '{filename}' saved.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving file: {ex.Message}");
+        }
+    }
+
+    static void CreateFile(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename))
+        {
+            Console.WriteLine("Usage: create <filename>");
+            return;
+        }
+
+        try
+        {
+            using (File.Create(filename)) { }
+            Console.WriteLine($"File '{filename}' created.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating file: {ex.Message}");
+        }
+    }
+
+    static void ChangeTheme(string color)
+    {
+        Console.WriteLine($"Theme color changed to {color}.");
+    }
+
+    static void CreateIcon(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            Console.WriteLine("Usage: createicon <name>");
+            return;
+        }
+
+        Console.WriteLine($"Icon '{name}' created.");
+    }
+
+    static void CreateDesktop(string resolution)
+    {
+        if (string.IsNullOrWhiteSpace(resolution))
+        {
+            Console.WriteLine("Usage: createdesktop <resolution>");
+            return;
+        }
+
+        Console.WriteLine($"Creating desktop with resolution {resolution}. Please customize your desktop settings.");
+
+        Console.WriteLine("Enter background color:");
+        string backgroundColor = Console.ReadLine();
+        Console.WriteLine("Enter icon size:");
+        string iconSize = Console.ReadLine();
+
+        string desktopFileName = $"{resolution}.deskarl";
+        List<string> desktopCommands = new List<string>
+        {
+            $"set background {backgroundColor}",
+            $"set iconSize {iconSize}"
+        };
+
+        try
+        {
+            File.WriteAllLines(desktopFileName, desktopCommands);
+            Console.WriteLine($"Desktop '{desktopFileName}' created with resolution {resolution}.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating desktop: {ex.Message}");
+        }
+    }
+
+    static void RandomCommand(string argument)
+    {
+        if (string.IsNullOrWhiteSpace(argument))
+        {
+            Console.WriteLine("Usage: random <min> <max>");
+            return;
+        }
+
+        string[] parts = argument.Split(' ');
+        if (parts.Length != 2 || !int.TryParse(parts[0], out int min) || !int.TryParse(parts[1], out int max))
+        {
+            Console.WriteLine("Usage: random <min> <max>");
+            return;
+        }
+
+        int randomValue = rnd.Next(min, max + 1);
+        Console.WriteLine($"Random number between {min} and {max}: {randomValue}");
+    }
+
+    static void Calculate(string expression)
+    {
+        if (string.IsNullOrWhiteSpace(expression))
+        {
+            Console.WriteLine("Usage: calc <expression>");
+            return;
+        }
+
+        try
+        {
+            var result = EvaluateExpression(expression);
+            Console.WriteLine($"Result: {result}");
+        }  
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error calculating expression: {ex.Message}");
+        }
+    }
+
+    static double EvaluateExpression(string expression)
+    {
+        // Simple implementation for demonstration purposes
+        // This can be expanded to handle more complex expressions
+        var dataTable = new System.Data.DataTable();
+        return Convert.ToDouble(dataTable.Compute(expression, string.Empty));
+    }
+}
