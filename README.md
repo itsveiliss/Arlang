@@ -15,7 +15,7 @@ This is beta of Arlang, created by 13 y.o. This is my first project so pls dont 
 
 # INSTALL
 
-Arlang does not need to be installed, because it is presented in the archive, but you can install GCC if for some reason it is not installed. And also open the file setuparlangforcmd.iss to install the command ''Arlang'' in cmd
+Arlang does not need to be installed, because it is presented in the archive, but you can install GCC if for some reason it is not installed. And also open the file setuparlangforcmd.exe to install the command ''Arlang'' in cmd
 
 # PLANS
 After some time there will be a version for Linux, and also another compiler, because gcc is very slow.
