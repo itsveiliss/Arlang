@@ -6,11 +6,15 @@ Syntax is really simple and similar to Python.
 Compiler is GCC, but you can install it on the repos.
 
 Main commands is:
+
+'''python
+
 print(Hello World!)
 set(x,10)
 calc(1+1)
 random(10000)
 
+'''python
 This is beta of Arlang, created by 13 y.o. This is my first project so pls dont hate me if i did something wrong.
 
 # INSTALL
