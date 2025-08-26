@@ -29,7 +29,6 @@
 
 # 📥 INSTALLING
 
-##
 **🪟 Windows**
 
 📦 Just download the [latest release](https://github.com/itsveiliss/Arlang/releases/tag/arlang)
