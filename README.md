@@ -47,7 +47,7 @@ arlang yourfile.arl -o yourfile
 ./yourfile
 ```
 
-## PLANS
+## 🌐 PLANS
 
 **💾 Memory control**
 
