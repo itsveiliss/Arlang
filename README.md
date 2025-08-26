@@ -23,8 +23,11 @@
 ## 🎯 Why Arlang?
 
 **🐍 For Python lovers who want more speed!**
+
 **⚡ For C developers who want more simplicity!**
+
 **🎓 For students learning programming!**
+
 **🚀 For hobbyists exploring language design!**
 
 # 📥 INSTALLING
