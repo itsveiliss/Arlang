@@ -43,7 +43,8 @@
 sudo git clone https://github.com/itsveiliss/Arlang.git
 sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64
 cd arlang
-arlang hello.arl
+arlang yourfile.arl -o yourfile
+./yourfile
 ```
 
 ## PLANS
