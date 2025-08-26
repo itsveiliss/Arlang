@@ -30,11 +30,11 @@
 
 **🚀 For hobbyists exploring language design!**
 
-# 📥 INSTALLING
+# 📥 **INSTALLING**
 
 **🪟 Windows**
 
-📦 Just download the [latest release](https://github.com/itsveiliss/Arlang/releases/tag/arlang)
+***📦 Just download the [latest release](https://github.com/itsveiliss/Arlang/releases/tag/arlang)***
 
 ##
 **🐧 Linux(put your packet manager)**
