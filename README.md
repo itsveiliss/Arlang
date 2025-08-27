@@ -6,7 +6,7 @@
 [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?&logo=discord&logoColor=white)](https://discord.gg/nG9E5uS87N) 
 [![Donate me](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?&logo=buy-me-a-coffee&logoColor=black)](https://www.donationalerts.com/r/veiliss)
 
-**Arlang is a programming language designed for simplicity 🐍 and efficiency ⚡. It combines Python-like syntax with C-like performance, making it perfect for both beginners and performance-critical applications. Created by a passionate 13-year-old developer, Arlang represents the future of accessible high-performance computing.**
+***Arlang is a programming language designed for simplicity 🐍 and efficiency ⚡. It combines Python-like syntax with C-like performance, making it perfect for both beginners and performance-critical applications. Created by a passionate 13-year-old developer, Arlang represents the future of accessible high-performance computing.***
 
 ## ✅ Implemented ✅
 
