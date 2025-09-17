@@ -10,15 +10,15 @@
 
 ## ✅ Implemented ✅
 
-   **🐍 Python-like syntax / Синтаксис как у Python**
+**🐍 Python-like syntax / Синтаксис как у Python**
 
-   **⚡ C-like performance / Производительность как у C**
+**⚡ C-like performance / Производительность как у C**
 
-   **🛡️ Static typing / Статическая типизация**
+**🛡️ Static typing / Статическая типизация**
 
-  **📦 Zero dependencies / Нулевые зависимости**
+**📦 Zero dependencies / Нулевые зависимости**
 
-  **🌐 Cross-platform / Кроссплатформенность**
+**🌐 Cross-platform / Кроссплатформенность**
 
 ## 🎯 Why Arlang?
 
@@ -40,11 +40,6 @@
 **🐧 Linux(put your packet manager)**
 
 ```
-sudo git clone https://github.com/itsveiliss/Arlang.git
-sudo apt install g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64
-cd arlang
-arlang yourfile.arl -o yourfile
-./yourfile
 ```
 
 ## 🌐 PLANS
@@ -55,9 +50,7 @@ arlang yourfile.arl -o yourfile
 
 **👨🏻‍💻 IDE Сompatibility**
 
-**📖 Libraries**
-
-**All of that stuff will be added in v0.7**
+**All of that stuff will be added in nearest update**
 
 # ❤️ SUPPORT ME A LITLE BIT ❤️
 **I will be glad to hear from you advice and support. Both moral and monetary support on my 
